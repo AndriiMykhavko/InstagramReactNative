@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "688161539775",
+    "firebase_url": "https://instagram-react-78246.firebaseio.com",
+    "project_id": "instagram-react-78246",
+    "storage_bucket": "instagram-react-78246.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688161539775:android:2ebbd22e46a7096647e80a",
+        "android_client_info": {
+          "package_name": "com.instagramreactnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688161539775-4dhrnasoo57ku3q9cd036ervnahm4c0g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.instagramreactnative",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "688161539775-n58725fv2efnj8oj8vsftjj6ns85gt8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcn4zzrAhNwNpn8FeD3X1NlWhtx2NE6-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688161539775-n58725fv2efnj8oj8vsftjj6ns85gt8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
