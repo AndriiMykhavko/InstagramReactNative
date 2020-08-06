@@ -15,7 +15,7 @@ class App extends React.Component{
   render() {
     return(
       <NavigationContainer>
-        <Text>Hello</Text>
+        <Text>Hello!!!</Text>
       </NavigationContainer>
     )
   }
