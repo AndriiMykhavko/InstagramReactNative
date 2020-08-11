@@ -48,8 +48,8 @@ class App extends React.Component<IProps & IDispatchRedux>{
       // <Provider store={store}>
         <NavigationContainer>
             {/* <Stack.Navigator> */}
-              {/* <IsUserAuth /> */}
-              {!this.props.isAuth ? 
+              <IsUserAuth />
+              {/* {!this.props.isAuth ? 
                 <>
                  <Stack.Screen name="SignIn" component={SignIn} />
                  <Stack.Screen name="SignUp" component={SignUp} />
@@ -58,7 +58,7 @@ class App extends React.Component<IProps & IDispatchRedux>{
                 <>
                   <Stack.Screen name="Main" component={Main} />
                 </>
-              }
+              } */}
               {/* <Stack.Screen name="SignIn" component={SignIn} />
               <Stack.Screen name="SignUp" component={SignUp} /> */}
               {/* <SignIn /> */}
