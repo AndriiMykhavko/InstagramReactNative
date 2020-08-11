@@ -49,7 +49,6 @@ class App extends React.Component<IProps & IDispatchRedux>{
         <NavigationContainer>
             {/* <Stack.Navigator> */}
               {/* <IsUserAuth /> */}
-              <Text>zalupa</Text> 
               {!this.props.isAuth ? 
                 <>
                  <Stack.Screen name="SignIn" component={SignIn} />
