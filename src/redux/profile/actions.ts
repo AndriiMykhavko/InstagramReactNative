@@ -1,4 +1,4 @@
-// import { userMamageAPI } from '../../api/api';
+import { userMamageAPI } from '../../api/api';
 import types from './types'
 
 export const actionCreator = (type: string, payload: any ) => ({
@@ -6,7 +6,7 @@ export const actionCreator = (type: string, payload: any ) => ({
   payload 
 })
 
-// export const setUserPhoto = (userName: string, image: any) => {
-//   userMamageAPI
-//   .cnangeUserPhoto(userName, image)
-// }
+export const setUserPhoto = (userName: string, image: any, imageName: string) => {
+  userMamageAPI
+  .cnangeUserPhoto(userName, image, imageName)
+}

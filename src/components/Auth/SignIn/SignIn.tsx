@@ -1,18 +1,22 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { required, emailValidation } from '../../../utils/validators/validator'
-// import { TextInput, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { renderInput } from '../TextInput';
 import { SignButtons } from '../SignButtons';
+import { login, googleAuth } from '../../../redux/auth/action'
 
+interface IDispatchRedux{
+  login: (email: string, password: string) => void,
+  googleAuth: () => void
+} 
 
 const SignInForm = (props: any) => {
-
+  
   const { handleSubmit } = props;
 
-  const onSubmit = (values: any) => console.log(values);
+  const onSubmit = (values: any) => props.login(values.email, values.password);
 
   return (
     <View style={styles.root}>
@@ -40,28 +44,21 @@ const SignInForm = (props: any) => {
           component={renderInput}
         />
       </View>
-      {/* <Button color="#0095F6" title={'Sign In'} onPress={handleSubmit(onSubmit)} /> */}
+     
       <SignButtons title="Sign In"  onPress={handleSubmit(onSubmit)} backgroundColor="#0095F6"/>
-      <View style={styles.orView}>
-        <Text style={styles.or}>OR</Text>
-      </View>
-      {/* <Button color="#DB4C3F" title={'Sing In with Google'} onPress={handleSubmit(onSubmit)} /> */}
-      <SignButtons title="Sing In with Google"  onPress={handleSubmit(onSubmit)} backgroundColor="#DB4C3F" />
-      <View style={styles.signUp}>
-        <Text style={styles.signUpText}>If you dont have account, </Text> 
-        <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
-          <Text style={styles.signUpTextSpan}>Sign Up</Text>
-        </TouchableOpacity>
-        {/* <Button title="SignUp "  onPress={() => props.navigation.navigate('SignUp')}/>  */}
-      </View>
+
+      
+
+      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
-    padding: 32,
+    // flex: 1,
+    // padding: 32,
+    paddingHorizontal: 32,
     justifyContent: 'center'
   },
   marginBottom: {
@@ -107,21 +104,36 @@ const styles = StyleSheet.create({
   }
 });
 
-// export default reduxForm({form: 'test-form'})(SignIn);
-
 const LoginReduxForm = reduxForm({form: 'SignIn'})(SignInForm)
-//export default reduxForm({form: 'SignIn'})(SignInForm)
-
 
 const SignIn = (props: any) => {
-  const onSubmit = (formData: any) => {
-    console.log(formData)
+
+  const login = (email: string, password: string) => {
+    props.login(email, password)
+  }
+  const googleAuth = () =>{
+    //props.googleAuth()
   }
 
   return(
     <View style={signInStyles.root}>
-      {/* <Text>Instagram</Text> */}
-      <LoginReduxForm navigation={props.navigation}/>
+      <LoginReduxForm navigation={props.navigation} login={login}/>
+
+      <View style={styles.orView}>
+        <Text style={styles.or}>OR</Text>
+      </View>
+
+      <View style={signInStyles.googleButtonWrapper}>
+        <SignButtons title="Sing In with Google"  onPress={googleAuth} backgroundColor="#DB4C3F" />
+      </View>
+
+        <View style={styles.signUp}>
+          <Text style={styles.signUpText}>If you dont have account, </Text> 
+          <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
+            <Text style={styles.signUpTextSpan}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+      
     </View>
   )
 }
@@ -130,6 +142,9 @@ const signInStyles = StyleSheet.create({
   root: {
     flex: 1,
     justifyContent: 'center'
+  },
+  googleButtonWrapper: {
+    marginHorizontal: 32
   }
 })
 
@@ -137,4 +152,9 @@ const mapStateToProps = (state: any) => ({
 
 })
 
-export default connect(mapStateToProps, {})(SignIn)
+const mapDispatchToProps: IDispatchRedux = {
+  login,
+  googleAuth
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

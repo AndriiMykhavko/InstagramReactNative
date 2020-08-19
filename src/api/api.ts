@@ -1,5 +1,6 @@
-// import * as firebase from "firebase";
 import auth from '@react-native-firebase/auth';
+import storage from '@react-native-firebase/storage';
+import firestore from '@react-native-firebase/firestore';
 
 
 export const authAPI: any = {
@@ -22,79 +23,77 @@ export const authAPI: any = {
   //   let provider = new firebase.auth.GoogleAuthProvider();
   //   provider.addScope('profile');
   //   provider.addScope('email');
-  //   firebase.auth().signInWithRedirect(provider);
+  //   auth().signInWithRedirect(provider);
   // }
 };
 
-// export const userMamageAPI: any = {
-//   cnangeUserPhoto(userName: string, image: any){
-//     firebase.storage().ref(`images/` + userName + `/` + image.name).put(image)
-//     .on(
-//       "state_changed",
-//       (snapshot:any) =>{},
-//       (error: any) => {
-//         console.log(error);
-//       },
-//       () => {
-//         firebase.storage()
-//           .ref("images")
-//           .child(userName + '/' + image.name)
-//           .getDownloadURL()
-//           .then((url) => {
-//             const user = firebase.auth().currentUser;
-//             if(user != null){
-//               user.updateProfile({
-//                 photoURL: url
-//               }).then(function() {
-//                 firebase.auth().updateCurrentUser(user);
-//               }).catch(function(error) {
-//                 alert("Some error")
-//               });
-//             }
-//           });
-//       }
-//     )
-//   }
-// }
+export const userMamageAPI: any = {
+  cnangeUserPhoto(userName: string, image: any, imageName: string){
+    storage().ref(`images/` + userName + `/` + imageName).putFile(image)
+    .on(
+      "state_changed",
+      () =>{},
+      (error: any) => {
+        console.log(error);
+      },
+      () => {
+        storage()
+          .ref("images")
+          .child(userName + '/' + imageName)
+          .getDownloadURL()
+          .then((url) => {
+            const user = auth().currentUser;
+              user?.updateProfile({
+                photoURL: url
+              })
+              .then(
+                // () => user.reload()
+                () => user.getIdToken(true)
+                
+                // auth().updateCurrentUser(user);
+                // auth().currentUser?.updateProfile
+              ).catch(function(error: any) {
+                console.log("Some error")
+              });
+          });
+      }
+    )
+  }
+}
 
-// export const managePostAPI: any = {
-//   uploadImage(name: string, image: any) {
-//     return firebase.storage().ref(`images/` + name + `/` + image.name).put(image)
-//   },
-//   uploadPostData(name: string, postImage: string, postData: string, uploadTime: string, userID: string, userPhoto: string) {
-//     // return firebase.firestore().collection("usersPosts").doc()
-//     return firebase.firestore().collection("usersPosts")
-//     .add({
-//       name: name,
-//       postImage: postImage,
-//       postData: postData,
-//       uploadTime: uploadTime,
-//       postComments: [],
-//       whoLikedPost: [],
-//       userID: userID,
-//       userPhoto: userPhoto
-//     });
-//   },
-//   uploadWhoLikedPostData(postID: string, userID: string) {
-//     return firebase.firestore().collection("usersPosts").doc(postID)
-//     .update({
-//       whoLikedPost: firebase.firestore.FieldValue.arrayUnion(userID)
-//     })
-//   },
-//   uploadWhoDeletedLikedPostData(postID: string, userID: string) {
-//     return firebase.firestore().collection("usersPosts").doc(postID)
-//     .update({
-//       whoLikedPost: firebase.firestore.FieldValue.arrayRemove(userID)
-//     })
-//   },
-//   uploadNewPostComment(postID: string, owner: string, ownerImage: string, comment: string,) {
-//     return firebase.firestore().collection("usersPosts").doc(postID)
-//     .update({
-//       postComments: firebase.firestore.FieldValue.arrayUnion({owner, ownerImage, comment})
-//     })
-//   }
-//   // async getAllPosts() {
-//   //   const snapshot = await firebase.firestore().collection('usersPosts').get()
-//   //   return snapshot.docs.map(doc => console.log(doc.data()));
-//   // }
-// }
+export const managePostAPI: any = {
+  uploadImage(name: string, image: any) {
+    return storage().ref(`images/` + name + `/` + image.name).put(image)
+  },
+  uploadPostData(name: string, postImage: string, postData: string, uploadTime: string, userID: string, userPhoto: string) {
+    return firestore().collection("usersPosts")
+    .add({
+      name: name,
+      postImage: postImage,
+      postData: postData,
+      uploadTime: uploadTime,
+      postComments: [],
+      whoLikedPost: [],
+      userID: userID,
+      userPhoto: userPhoto
+    });
+  },
+  uploadWhoLikedPostData(postID: string, userID: string) {
+    return firestore().collection("usersPosts").doc(postID)
+    .update({
+      whoLikedPost: firestore.FieldValue.arrayUnion(userID)
+    })
+  },
+  uploadWhoDeletedLikedPostData(postID: string, userID: string) {
+    return firestore().collection("usersPosts").doc(postID)
+    .update({
+      whoLikedPost: firestore.FieldValue.arrayRemove(userID)
+    })
+  },
+  uploadNewPostComment(postID: string, owner: string, ownerImage: string, comment: string,) {
+    return firestore().collection("usersPosts").doc(postID)
+    .update({
+      postComments: firestore.FieldValue.arrayUnion({owner, ownerImage, comment})
+    })
+  }
+}

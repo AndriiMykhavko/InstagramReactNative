@@ -13,70 +13,105 @@ import { connect } from 'react-redux';
 import SignIn from './src/components/Auth/SignIn/SignIn';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignUp from './src/components/Auth/SignUp/SignUp';
-import Main from './src/components/Main/Main';
+import MainContainer from './src/components/Main/MainContainer';
 import auth from '@react-native-firebase/auth';
 import { logInUser } from './src/redux/auth/action'
-import IsUserAuth from './src/components/Auth/IsAuth/IsUserAuth';
+import firestore from '@react-native-firebase/firestore';
+import { resetInitialLoad, setPost, setNewPost, turnOnNewPostNotification } from './src/redux/posts/actions'
+import ProfileContainer from './src/components/Profile/ProfileContainer'
 
 const Stack = createStackNavigator();
 
 interface IProps{
-  isAuth: boolean
+  isAuth: boolean,
+  initialeLoad: boolean,
+  userID: string
 }
 
 interface IDispatchRedux{
-  logInUser: (displayName: string, userID: string, userPhoto: string, isAuth?: boolean) => void
+  logInUser: (displayName: string, userID: string, userPhoto: string, isAuth?: boolean) => void,
+  resetInitialLoad: () => void,
+  setPost: ( id: string, data: any[] ) => void,
+  setNewPost: ( id: string, data: any[] ) => void,
+  turnOnNewPostNotification: () => void
 }
 
 class App extends React.Component<IProps & IDispatchRedux>{
-  // componentDidMount() {
-  //   auth().onAuthStateChanged(
-  //     (user) => {
-  //       if (user !== null) {
-  //         console.log(user.displayName)
-  //         //this.props.logInUser(user.displayName, user.uid, user.photoURL);
-  //       }
-  //       // if (user && user.displayName === null) {
-  //       //   auth().updateCurrentUser(user);
-  //       // }
-  //     }
-  // )
-  // }
+  componentDidMount() {
+
+    auth().onIdTokenChanged(
+      (user) => {
+        if (user !== null) {
+          this.props.logInUser(user.displayName, user.uid, user.photoURL);
+        }
+        // if (user && user.displayName === null) {
+        //   auth().updateCurrentUser(user);
+        // }
+      }
+    )
+
+    firestore().collection("usersPosts")
+      .orderBy("uploadTime", "asc").onSnapshot((snapshot) => {
+        if(this.props.initialeLoad){
+          snapshot.docs.map((doc) => {
+            this.props.setPost(doc.id, doc.data())
+          })
+         this.props.resetInitialLoad()
+        } else {
+          snapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+                 if(change.doc.data().userID != this.props.userID) {
+                  this.props.setNewPost(change.doc.id, change.doc.data())
+                  this.props.turnOnNewPostNotification()
+                 }
+            }
+            if (change.type === "modified") {
+                console.log("Modified: ", change.doc.data());
+            }
+            if (change.type === "removed") {
+                console.log("Removed: ", change.doc.data());
+            }
+        });
+        }
+    });
+
+  }
 
   render() {
     return(
-      // <Provider store={store}>
         <NavigationContainer>
-            {/* <Stack.Navigator> */}
-              <IsUserAuth />
-              {/* {!this.props.isAuth ? 
+            <Stack.Navigator>
+              {!this.props.isAuth ? 
                 <>
                  <Stack.Screen name="SignIn" component={SignIn} />
                  <Stack.Screen name="SignUp" component={SignUp} />
                 </>
                 :
                 <>
-                  <Stack.Screen name="Main" component={Main} />
+                  <Stack.Screen name="Main" component={MainContainer} />
+                  <Stack.Screen name="Profile" component={ProfileContainer} />
                 </>
-              } */}
-              {/* <Stack.Screen name="SignIn" component={SignIn} />
-              <Stack.Screen name="SignUp" component={SignUp} /> */}
-              {/* <SignIn /> */}
-            {/* </Stack.Navigator> */}
+              }
+            </Stack.Navigator>
         </NavigationContainer>
-      // </Provider>
     )
   }
 }
 
 const mapStateToProps = (state: any) => {
   return{
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    initialeLoad: state.postsPage.initialeLoad,
+    userID: state.auth.userID
   }
 }
 
 const mapDispatchToProps: IDispatchRedux = {
-  logInUser
+  logInUser,
+  resetInitialLoad,
+  setPost,
+  setNewPost,
+  turnOnNewPostNotification 
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

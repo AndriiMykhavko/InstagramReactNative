@@ -11,6 +11,18 @@ export const logInUser = (displayName: string, userID: string, userPhoto: string
   dispatch(actionCreator(types.SET_USER_AUTH, {displayName, userID, userPhoto, isAuth}))
 }
 
+export const login = (email: string, password: string) => (dispatch: any) => {
+  authAPI
+    .login(email, password)
+    .then((response: any) => {
+      //console.log(response)
+      if(response.user.email.length !== 0) {
+        // dispatch(logInUser())
+      }
+    })
+    .catch((error: any) => console.log(error));
+}
+
 export const logoutUser = (displayName = '', userID = '', userPhoto = null, isAuth = false) => (dispatch: any) => {
   dispatch(actionCreator(types.SET_USER_AUTH, {displayName, userID, userPhoto, isAuth}))
 }
