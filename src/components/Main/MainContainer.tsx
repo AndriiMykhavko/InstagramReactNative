@@ -7,7 +7,6 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { turnOffNewPostNotification, resetNewPosts, setPost  } from '../../redux/posts/actions'
 import PostsContainer from '../Posts/PostsContainer'
 
-
 interface IProps{
   newPosts: any[],
   addedNewPost: boolean,
@@ -21,12 +20,14 @@ interface IDispatcRedux{
 }
 
 class  MainContainer extends React.Component<IProps&IDispatcRedux> {
+
+  componentDidMount() {
+    console.log(this.props.addedNewPost)
+  }
   addingNewPostToState = () => {
     this.props.newPosts.map((post) => {
       this.props.setPost(post.postID, post.postData)
     })
-    // window.focus()
-    // window.scrollTo( 0, 0 )
     this.props.resetNewPosts()
     this.props.turnOffNewPostNotification()
   }
@@ -34,17 +35,20 @@ class  MainContainer extends React.Component<IProps&IDispatcRedux> {
   render() {
     return (
       <View style={styles.mainWrapper}>
-        <HeaderContainer />
-        <ScrollView>
-          <View style={styles.mainContent}> 
 
-          { this.props.addedNewPost && 
-            <TouchableOpacity style={styles.addedNewPost} 
-            onPress={() => {this.addingNewPostToState; 
-            this.refs._scrollView.scrollTo({x: 0, y: 0, animated: true})}} ref='_scrollView'>
+        <HeaderContainer />
+
+        { this.props.addedNewPost && 
+          <View style={styles.position}>
+          <TouchableOpacity style={styles.addedNewPost} 
+            onPress={() => {this.addingNewPostToState(); this.refs._scrollView.scrollTo({x: 0, y: 0, animated: true})}} >
               <Text style={styles.addedNewPostText}>Added new post</Text>
             </TouchableOpacity>
+            </View>
           }
+
+        <ScrollView ref='_scrollView'>
+          <View style={styles.mainContent}> 
           
             <PostsContainer />
 
@@ -59,15 +63,13 @@ class  MainContainer extends React.Component<IProps&IDispatcRedux> {
 const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
-    backgroundColor: '#FAFAFA'
+    backgroundColor: '#FAFAFA',
+    position: 'relative'
   },
   mainContent: {
-    // alignItems: 'center'
     alignItems: 'stretch'
   },
   addedNewPost: {
-  // position: sticky;
-  // top: 10px;
   margin: 15,
   backgroundColor: '#fff',
   paddingHorizontal: 15,
@@ -75,10 +77,16 @@ const styles = StyleSheet.create({
   borderColor: '#DBDBDB',
   borderStyle: 'solid',
   borderWidth: 1,
-  borderRadius: 5
+  borderRadius: 5,
   },
   addedNewPostText: {
     fontFamily: 'Sora-Regular'
+  },
+  position: {
+    position: 'absolute',
+    left: '30%',
+    top: '10%',
+    zIndex:100
   }
 })
 

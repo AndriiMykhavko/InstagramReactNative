@@ -4,11 +4,11 @@ import { UserPhotoSection } from '../../UserPhotoSection/UserPhotoSection'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons'
-import CommentsSection from './CommentsSection/CommentsSection'
 import { IComment } from './CommentsSection/Comment/Comment'
 import FitImage from 'react-native-fit-image'
 import moment from "moment";
 import PostCommentsModal from './PostCommentsModal'
+import CommentsSectionContainer from './CommentsSection/CommentsSectionContainer'
 
 export interface IPost{
   likes: string[],
@@ -46,7 +46,6 @@ export default function Post(props: IPost): JSX.Element {
       </View>
 
       <View style={styles.postPhotoWrapper}>
-        {/* <Image resizeMode={'contain'} style={styles.postPhoto} source={{uri: props.postImg}} /> */}
         <FitImage
           source={{ uri: props.postImg }}
           />
@@ -96,7 +95,8 @@ export default function Post(props: IPost): JSX.Element {
         <Text style={styles.postText}> <Text style={styles.ownerNameText}>{props.owner}</Text> {props.postData} </Text>
       </View>
 
-      <CommentsSection postComments={props.postComments} postID={props.postID} owner={props.owner} />
+
+      <CommentsSectionContainer postComments={props.postComments} postID={props.postID} owner={props.owner} />
 
     </View>
   )

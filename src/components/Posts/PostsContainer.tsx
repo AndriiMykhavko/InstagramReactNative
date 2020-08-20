@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import Posts from './Posts'
 import { likePost, unlikePost } from '../../redux/posts/actions'
 import { IPost } from './Post/Post'
+import { setPost, turnOffNewPostNotification, resetNewPosts } from '../../redux/posts/actions'
 
 interface IReduxState{
   posts: IPost[],
-  userID: string,
+  userID: string
 }
 
 interface IDispatchRedux{
@@ -33,7 +34,7 @@ class PostsContainer extends Component<IReduxState & IDispatchRedux>{
 const mapStateToProps = (state: any) => {
   return{
     posts: state.postsPage.posts,
-    userID: state.auth.userID
+    userID: state.auth.userID,
   }
 }
 

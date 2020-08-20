@@ -1,12 +1,12 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, TextInput } from 'react-native'
 import Comment, { IComment } from './Comment/Comment'
-import AddNewCommentFormContainer from './AddNewCommentForm/AddNewCommentFormContainer'
 
 interface IProps{
   postComments: IComment[],
   postID: string,
   owner: string,
+  addCommetnIntoDB: (newCommentText: string) => void
 }
 
 export default function CommentsSection(props: IProps): JSX.Element {
@@ -15,11 +15,26 @@ export default function CommentsSection(props: IProps): JSX.Element {
     <Comment  key={index} owner={commentData.owner} ownerImage={commentData.ownerImage} comment={commentData.comment}/>
   )
 
+  const [commnetData, onChangeCommentText] = React.useState('')
+
+  const addCommetn = (newCommentText: string) => {
+    props.addCommetnIntoDB(newCommentText)
+    onChangeCommentText('')
+  }
+
   return (
     <View style={styles.addCommentSection}>
 
-      <View>
-        <AddNewCommentFormContainer postID={props.postID}/>
+      <View style={styles.addCommentWrapper}>
+
+        <View style={styles.textInput}>
+          <TextInput multiline={true} placeholder={'Add your comment...'} value={commnetData} onChangeText={text => onChangeCommentText(text)}/>
+        </View>
+
+        <TouchableOpacity style={styles.publishButtonWrapper} disabled={!commnetData} onPress={() => addCommetn(commnetData)}>
+          <Text style={[styles.publishButtonText, !commnetData ? styles.disabledButton : styles.activeButton]}>Publish</Text>
+        </TouchableOpacity>
+
       </View>
 
       <View style={styles.commentWrapper}>
@@ -47,5 +62,28 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#DBDBDB',
     borderStyle: 'solid'
+  },
+  addCommentWrapper: {
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    maxHeight: 200
+  },
+  textInput: {
+    width: '85%'
+  },
+  publishButtonWrapper: {
+    justifyContent: 'flex-end',
+    flex: 1,
+    marginBottom: 10
+  },
+  publishButtonText: {
+    fontWeight: 'bold'
+  },
+  disabledButton: {
+    color: '#9cd6fc'
+  },
+  activeButton: {
+    color: '#0F9BF7'
   }
 })
