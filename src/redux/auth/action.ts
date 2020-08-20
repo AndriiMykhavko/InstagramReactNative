@@ -42,10 +42,9 @@ export const registration = ( name: string, email: string, password: string) => 
     .catch((error: any) => console.log(error));
 };
 
-export const googleAuth = () => {
+export const googleAuthentication = () => {
   authAPI
   .googleAuth()
-  .then( (response: any) => console.log(response))
 }
 
 export const logout = () => (dispatch: any) => {

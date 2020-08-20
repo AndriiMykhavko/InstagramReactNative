@@ -5,11 +5,10 @@ import { required, emailValidation } from '../../../utils/validators/validator'
 import { connect } from 'react-redux';
 import { renderInput } from '../TextInput';
 import { SignButtons } from '../SignButtons';
-import { login, googleAuth } from '../../../redux/auth/action'
+import { login, googleAuthentication } from '../../../redux/auth/action'
 
 interface IDispatchRedux{
-  login: (email: string, password: string) => void,
-  googleAuth: () => void
+  login: (email: string, password: string) => void
 } 
 
 const SignInForm = (props: any) => {
@@ -46,9 +45,6 @@ const SignInForm = (props: any) => {
       </View>
      
       <SignButtons title="Sign In"  onPress={handleSubmit(onSubmit)} backgroundColor="#0095F6"/>
-
-      
-
       
     </View>
   );
@@ -56,8 +52,6 @@ const SignInForm = (props: any) => {
 
 const styles = StyleSheet.create({
   root: {
-    // flex: 1,
-    // padding: 32,
     paddingHorizontal: 32,
     justifyContent: 'center'
   },
@@ -111,8 +105,8 @@ const SignIn = (props: any) => {
   const login = (email: string, password: string) => {
     props.login(email, password)
   }
-  const googleAuth = () =>{
-    //props.googleAuth()
+  const googleAuth = () => {
+    return googleAuthentication()
   }
 
   return(
@@ -124,7 +118,7 @@ const SignIn = (props: any) => {
       </View>
 
       <View style={signInStyles.googleButtonWrapper}>
-        <SignButtons title="Sing In with Google"  onPress={googleAuth} backgroundColor="#DB4C3F" />
+        <SignButtons title="Sing In with Google"  onPress={() => googleAuth()} backgroundColor="#DB4C3F" />
       </View>
 
         <View style={styles.signUp}>
@@ -133,7 +127,7 @@ const SignIn = (props: any) => {
             <Text style={styles.signUpTextSpan}>Sign Up</Text>
           </TouchableOpacity>
         </View>
-      
+
     </View>
   )
 }
@@ -153,8 +147,7 @@ const mapStateToProps = (state: any) => ({
 })
 
 const mapDispatchToProps: IDispatchRedux = {
-  login,
-  googleAuth
+  login
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

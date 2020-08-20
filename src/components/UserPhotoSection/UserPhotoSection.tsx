@@ -5,16 +5,16 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 interface IProps{
   userPhoto: string,
-  ownerImageWrapper: any,
-  ownerIconOutline: any,
-  ownerImage: any,
-  ownerIconWrapper: any,
-  iconSize: number
+  ownerImageWrapper?: any,
+  ownerIconOutline?: any,
+  ownerImage?: any,
+  ownerIconWrapper?: any,
+  iconSize?: number
 }
 
 export const UserPhotoSection = (props: IProps) => {
   return(
-    <View style={styles.iconWrapper}>
+    <View>
         <View style={[styles.ownerIconOutline, props.ownerIconOutline]}>
           {
             props.userPhoto ? 
@@ -32,12 +32,6 @@ export const UserPhotoSection = (props: IProps) => {
 }
 
 const styles = StyleSheet.create({
-  iconWrapper: {
-    // borderColor: 'darkgrey',
-    // borderStyle: 'solid',
-    // borderWidth: 2,
-    // padding: 5
-  },
   ownerIconOutline: {
     borderColor: 'darkgrey',
     borderStyle: 'solid',

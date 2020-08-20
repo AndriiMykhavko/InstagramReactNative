@@ -19,6 +19,11 @@ import { logInUser } from './src/redux/auth/action'
 import firestore from '@react-native-firebase/firestore';
 import { resetInitialLoad, setPost, setNewPost, turnOnNewPostNotification } from './src/redux/posts/actions'
 import ProfileContainer from './src/components/Profile/ProfileContainer'
+import { GoogleSignin } from '@react-native-community/google-signin';
+
+GoogleSignin.configure({
+  webClientId: '688161539775-n58725fv2efnj8oj8vsftjj6ns85gt8g.apps.googleusercontent.com',
+});
 
 const Stack = createStackNavigator();
 

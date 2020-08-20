@@ -7,7 +7,6 @@ import {
   TouchableHighlight,
   View,
   TouchableWithoutFeedback,
-  Image,
   TouchableOpacity
 } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -69,7 +68,6 @@ const AddUserPhotoModal = (props: any) => {
             
             <View style={styles.closeButtonWrapper}>
             <TouchableWithoutFeedback
-              style={{ ...styles.openButton}}
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}

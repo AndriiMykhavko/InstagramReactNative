@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-
+import { GoogleSignin } from '@react-native-community/google-signin';
 
 export const authAPI: any = {
   login(email: string, password: string) {
@@ -13,18 +13,22 @@ export const authAPI: any = {
   logout() {
     return auth().signOut();
   },
-  // googleAuth(){
-  //   auth().getRedirectResult().then(function(result: any) {
-  //     if (result.credential) {
-  //       let token = result.credential.accessToken;
-  //     }
-  //     let user = result.user;
-  //   });
-  //   let provider = new firebase.auth.GoogleAuthProvider();
-  //   provider.addScope('profile');
-  //   provider.addScope('email');
-  //   auth().signInWithRedirect(provider);
-  // }
+  googleAuth() {
+    
+      async function onGoogleButtonPress () {
+        // Get the users ID token
+        const { idToken } = await GoogleSignin.signIn();
+      
+        // Create a Google credential with the token
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      
+        // Sign-in the user with the credential
+        return auth().signInWithCredential(googleCredential);
+      }
+
+      return(onGoogleButtonPress())
+      .catch(() => console.log('Google Auth ERROR'))
+  }
 };
 
 export const userMamageAPI: any = {
@@ -47,11 +51,7 @@ export const userMamageAPI: any = {
                 photoURL: url
               })
               .then(
-                // () => user.reload()
                 () => user.getIdToken(true)
-                
-                // auth().updateCurrentUser(user);
-                // auth().currentUser?.updateProfile
               ).catch(function(error: any) {
                 console.log("Some error")
               });
@@ -63,7 +63,7 @@ export const userMamageAPI: any = {
 
 export const managePostAPI: any = {
   uploadImage(name: string, image: any) {
-    return storage().ref(`images/` + name + `/` + image.name).put(image)
+    return storage().ref(`images/` + name + `/` + image.name).putFile(image)
   },
   uploadPostData(name: string, postImage: string, postData: string, uploadTime: string, userID: string, userPhoto: string) {
     return firestore().collection("usersPosts")
