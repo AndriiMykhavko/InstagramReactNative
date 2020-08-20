@@ -2,17 +2,20 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { required, emailValidation } from '../../../utils/validators/validator'
-// import { TextInput, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { renderInput } from '../TextInput';
 import { SignButtons } from '../SignButtons';
+import { registration } from '../../../redux/auth/action'
 
+interface IDispatchRedux{
+  registration: (name: string, email: string, password: string) => void
+}
 
-const SignUn = (props: any) => {
+const SignUpForm = (props: any) => {
 
   const { handleSubmit } = props;
 
-  const onSubmit = (values: any) => console.log(values);
+  const onSubmit = (values: any) => props.registration(values.name, values.email, values.password);
 
   return (
     <View style={styles.root}>
@@ -101,55 +104,41 @@ const styles = StyleSheet.create({
   }
 });
 
-export default reduxForm({form: 'test-form'})(SignUn);
+const SignUpReduxForm = reduxForm({form: 'test-form'})(SignUpForm);
 
-// const SignInForm = (props: any) => {
-//     return (
-//         <ScrollView keyboardShouldPersistTaps={'handled'}>
-//           <View>
-//             <Field placeholder="Email" validate={[required, emailValidation]} name={"email"} component={TextInput} />
-//           </View>
-//           <View>
-//             <Field placeholder="Password" validate={[required]} name={"password"} component={TextInput} />
-//           </View>
-//           {/* <TouchableOpacity style={formStyles.formButton} onPress={props.handleSubmit(submit) >
-//             <Text >Sign In</Text>
-//           </TouchableOpacity> */}
-//           <Button title={'Sign In'} onPress={props.handleSubmit(submit)} />
-//         </ScrollView>
-//     )
-// }
+const formStyles = StyleSheet.create({
+  formButton: {
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
+    padding: 10
+  },
+})
 
-// const formStyles = StyleSheet.create({
-//   formButton: {
-//     alignItems: "center",
-//     backgroundColor: "#DDDDDD",
-//     padding: 10
-//   },
-// })
+const SignUp = (props: any) => {
+  const registration = (name: string, email: string, password: string) => {
+    props.registration(name, email, password)
+  }
 
-// const LoginReduxForm = reduxForm({form: 'login'})(SignInForm)
-//export default reduxForm({form: 'login'})(SignInForm)
+  return(
+    <View style={signInStyles.root}>
+      <SignUpReduxForm navigation={props.navigation} registration={registration}/>
+    </View>
+  )
+}
 
-// const SignIn = (props: any) => {
-//   const onSubmit = (formData: any) => {
-//     console.log(formData)
-//   }
+const signInStyles = StyleSheet.create({
+  root: {
+    flex: 1,
+    justifyContent: 'center'
+  }
+})
 
-//   return(
-//     <View>
-//       <Text>Instagram</Text>
-//       {/* <LoginReduxForm onSubmit={onSubmit}/> */}
-//     </View>
-//   )
-// }
+const mapStateToProps = (state: any) => ({
 
-// const signInStyles = StyleSheet.create({
+})
 
-// })
+const mapDispatchToProps: IDispatchRedux = {
+  registration
+}
 
-// const mapStateToProps = (state: any) => ({
-
-// })
-
-// // export default connect(mapStateToProps, {})(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

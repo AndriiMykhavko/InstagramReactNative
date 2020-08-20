@@ -60,6 +60,12 @@ export const postsReducer = (state = initialState, action: any) => {
         newPosts: []
       }
     }
+    // case types.RESET_POSTS: {
+    //   return{
+    //     ...state,
+    //     posts: []
+    //   }
+    // }
     case types.ADD_NEW_LIKE_TO_POST: {
       const payload = action.payload
       const index = state.posts.findIndex((item: any) => {

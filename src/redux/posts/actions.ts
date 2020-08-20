@@ -31,6 +31,10 @@ export const resetNewPosts = () => ({
   type: types.RESET_NEW_POSTS,
 });
 
+// export const resetPosts = () => ({
+//   type: types.RESET_POSTS,
+// });
+
 export const likePost = (postID: string, userID: string) => (dispatch: any) => {
   managePostAPI
   .uploadWhoLikedPostData(postID, userID)

@@ -15,9 +15,7 @@ export const login = (email: string, password: string) => (dispatch: any) => {
   authAPI
     .login(email, password)
     .then((response: any) => {
-      //console.log(response)
       if(response.user.email.length !== 0) {
-        // dispatch(logInUser())
       }
     })
     .catch((error: any) => console.log(error));
@@ -31,13 +29,12 @@ export const registration = ( name: string, email: string, password: string) => 
   authAPI
     .registration(email, password)
     .then((response: any) => {
+      console.log(response)
       if(response.user) {
         response.user.updateProfile({
           displayName: name,
         })
       }
-      // console.log(response)
-      // debugger
     })
     .catch((error: any) => console.log(error));
 };

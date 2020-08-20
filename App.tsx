@@ -49,9 +49,9 @@ class App extends React.Component<IProps & IDispatchRedux>{
         if (user !== null) {
           this.props.logInUser(user.displayName, user.uid, user.photoURL);
         }
-        // if (user && user.displayName === null) {
-        //   auth().updateCurrentUser(user);
-        // }
+        if (user && user.displayName === null) {
+          user.getIdToken(true)
+        }
       }
     )
 
