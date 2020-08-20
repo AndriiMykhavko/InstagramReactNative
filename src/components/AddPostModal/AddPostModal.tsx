@@ -16,11 +16,13 @@ interface IProps{
   name: string,
   userPhoto: string,
   userID: string,
-  addPostIntoDB: (userName: string, postImage: any, postData: string, userID: string, userPhoto: string) => void
+  addPostIntoDB: (userName: string, postImage: any, postData: string, userID: string, userPhoto: string, imageName: string) => void
 }
 
 const AddPostModal: React.FC<IProps> = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const closeModal = () =>  setModalVisible(!modalVisible)
 
   return (
     <View style={styles.centeredView}>
@@ -46,7 +48,7 @@ const AddPostModal: React.FC<IProps> = (props) => {
             </TouchableWithoutFeedback>
             </View>
 
-              <PostDataHandler {...props}/>
+              <PostDataHandler {...props} closeModal={closeModal}/>
 
           </View>
         </View>

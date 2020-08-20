@@ -58,12 +58,12 @@ export const addCommetnIntoDB = (postID: string, owner: string, ownerImage: stri
 });
 };
 
-export const addPostIntoDB = (name: string, postImage: any, postText: string, userID: string, userPhoto: string) => (dispatch: any) => {
+export const addPostIntoDB = (name: string, postImage: any, postText: string, userID: string, userPhoto: string, imageName: string) => (dispatch: any) => {
   managePostAPI
-    .uploadImage(name, postImage)
+    .uploadImage(name, postImage, imageName)
     .on(
       "state_changed",
-      (snapshot:any) =>{},
+      () =>{},
       (error: any) => {
         console.log("Some error with image", error);
       },

@@ -62,8 +62,8 @@ export const userMamageAPI: any = {
 }
 
 export const managePostAPI: any = {
-  uploadImage(name: string, image: any) {
-    return storage().ref(`images/` + name + `/` + image.name).putFile(image)
+  uploadImage(name: string, image: any, imageName: string) {
+    return storage().ref(`images/` + name + `/` + imageName).putFile(image)
   },
   uploadPostData(name: string, postImage: string, postData: string, uploadTime: string, userID: string, userPhoto: string) {
     return firestore().collection("usersPosts")

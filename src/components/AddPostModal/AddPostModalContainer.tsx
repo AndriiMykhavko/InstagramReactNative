@@ -10,12 +10,12 @@ interface IProps {
 }
 
 interface IDispatchRedux{
-  addPostIntoDB: (userName: string, postImage: any, postData: string, userID: string, userPhoto: string) => void
+  addPostIntoDB: (userName: string, postImage: any, postData: string, userID: string, userPhoto: string, imageName: string) => void
 }
 
 class AddPostModalContainer extends React.Component<IProps & IDispatchRedux> {
-  addPostIntoDB = (userName: string, postImage: any, postData: string, userID: string, userPhoto: string) => {
-    this.props.addPostIntoDB(userName, postImage, postData, userID, userPhoto)
+  addPostIntoDB = (userName: string, postImage: any, postData: string, userID: string, userPhoto: string, imageName: string) => {
+    this.props.addPostIntoDB(userName, postImage, postData, userID, userPhoto, imageName)
   }
   
   render() {

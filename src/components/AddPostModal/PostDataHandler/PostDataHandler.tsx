@@ -14,7 +14,8 @@ interface IProps{
   name: string,
   userPhoto: string,
   userID: string,
-  addPostIntoDB: (userName: string, postImage: any, postData: string, userID: string, userPhoto: string) => void
+  addPostIntoDB: (userName: string, postImage: any, postData: string, userID: string, userPhoto: string, imageName: string) => void,
+  closeModal: () => void
 }
 
 const PostDataHandler: React.FC<IProps> = (props) => {
@@ -23,7 +24,8 @@ const PostDataHandler: React.FC<IProps> = (props) => {
   const [postData, onChangeText] = React.useState(null);
   
   const addPostIntoDB = () => {
-    props.addPostIntoDB(props.name, photoPath, postData, props.userID, props.userPhoto )
+    props.addPostIntoDB(props.name, photoPath, postData, props.userID, props.userPhoto, photo?.name )
+    props.closeModal()
   }
 
   const handleChosePhoto = () => {
