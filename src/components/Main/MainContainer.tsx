@@ -6,26 +6,16 @@ import BottomNavigationContainer from '../BottomNavigation/BottomNavigationConta
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { turnOffNewPostNotification, resetNewPosts, setPost  } from '../../redux/posts/actions'
 import PostsContainer from '../Posts/PostsContainer'
+import { INewPostMap, IMainContainerProps, IMainContainerDispatchRedux } from '../../../types'
 
-interface IProps{
-  newPosts: any[],
-  addedNewPost: boolean,
-  navigation: any
-}
 
-interface IDispatcRedux{
-  setPost: (postID: string, postData: any[]) => void,
-  resetNewPosts: () => void,
-  turnOffNewPostNotification: () => void
-}
-
-class  MainContainer extends React.Component<IProps&IDispatcRedux> {
+class  MainContainer extends React.Component<IMainContainerProps & IMainContainerDispatchRedux> {
 
   componentDidMount() {
     console.log(this.props.addedNewPost)
   }
   addingNewPostToState = () => {
-    this.props.newPosts.map((post) => {
+    this.props.newPosts.map((post: INewPostMap) => {
       this.props.setPost(post.postID, post.postData)
     })
     this.props.resetNewPosts()
@@ -95,7 +85,7 @@ const mapStateToProps = (state: any) => ({
   newPosts: state.postsPage.newPosts
 })
 
-const mapDispatchToProps: IDispatcRedux ={
+const mapDispatchToProps: IMainContainerDispatchRedux ={
   turnOffNewPostNotification,
   resetNewPosts,
   setPost

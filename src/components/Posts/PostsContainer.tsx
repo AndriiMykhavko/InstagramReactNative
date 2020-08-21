@@ -2,20 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Posts from './Posts'
 import { likePost, unlikePost } from '../../redux/posts/actions'
-import { IPost } from './Post/Post'
-import { setPost, turnOffNewPostNotification, resetNewPosts } from '../../redux/posts/actions'
+import { IPostsContainerProps, IPostDispatchRedux } from '../../../types.d'
 
-interface IReduxState{
-  posts: IPost[],
-  userID: string
-}
 
-interface IDispatchRedux{
-  likePost: (postID: string, userID: string) => void,
-  unlikePost: (postID: string, userID: string) => void
-}
-
-class PostsContainer extends Component<IReduxState & IDispatchRedux>{
+class PostsContainer extends Component<IPostsContainerProps & IPostDispatchRedux>{
 
   likePost = (postID: string, userID: string) => {
     this.props.likePost(postID, userID)

@@ -11,7 +11,7 @@ export const logInUser = (displayName: string, userID: string, userPhoto: string
   dispatch(actionCreator(types.SET_USER_AUTH, {displayName, userID, userPhoto, isAuth}))
 }
 
-export const login = (email: string, password: string) => (dispatch: any) => {
+export const login = (email: string, password: string) =>  {
   authAPI
     .login(email, password)
     .then((response: any) => {
@@ -25,7 +25,7 @@ export const logoutUser = (displayName = '', userID = '', userPhoto = null, isAu
   dispatch(actionCreator(types.SET_USER_AUTH, {displayName, userID, userPhoto, isAuth}))
 }
 
-export const registration = ( name: string, email: string, password: string) => (dispatch: any) => {
+export const registration = ( name: string, email: string, password: string) => {
   authAPI
     .registration(email, password)
     .then((response: any) => {

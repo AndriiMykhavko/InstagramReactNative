@@ -2,17 +2,9 @@ import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { IUserPtotoProps } from '../../../types'
 
-interface IProps{
-  userPhoto: string,
-  ownerImageWrapper?: any,
-  ownerIconOutline?: any,
-  ownerImage?: any,
-  ownerIconWrapper?: any,
-  iconSize?: number
-}
-
-export const UserPhotoSection = (props: IProps) => {
+export const UserPhotoSection: React.FC<IUserPtotoProps> = (props) => {
   return(
     <View>
         <View style={[styles.ownerIconOutline, props.ownerIconOutline]}>

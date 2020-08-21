@@ -14,15 +14,13 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import ImagePicker from 'react-native-image-picker'
 import FitImage from 'react-native-fit-image'
 import { setUserPhoto } from '../../redux/profile/actions'
+import { IAddPhotoModalProps } from "../../../types";
 
-interface IProps{
-  userName: string
-}
 
-const AddUserPhotoModal = (props: any) => {
+const AddUserPhotoModal: React.FC<IAddPhotoModalProps> = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [photo, setPhoto] = useState(null);
-  const [photoPath, setPhotoPath] = useState(null);
+  const [photoPath, setPhotoPath] = useState('');
 
   const handleChosePhoto = () => {
     const options = {
@@ -49,7 +47,7 @@ const AddUserPhotoModal = (props: any) => {
     setUserPhoto(props.userName, photoPath, photo?.fileName)
     setModalVisible(!modalVisible)
     setPhoto(null)
-    setPhotoPath(null)
+    setPhotoPath('')
   }
 
   return (
@@ -75,8 +73,6 @@ const AddUserPhotoModal = (props: any) => {
               <FontAwesomeIcon icon={ faTimes } size={ 24 }/>
             </TouchableWithoutFeedback>
             </View>
-
-            {/* <ImageUploader userName={props.userName} /> */}
 
             {photo && (
               <FitImage source={{ uri: photo.uri }} />

@@ -5,14 +5,10 @@
  * @format
  * @flow strict-local
  */
-import 'react-native-gesture-handler';
 import React from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { connect } from 'react-redux';
-import SignIn from './src/components/Auth/SignIn/SignIn';
 import { createStackNavigator } from '@react-navigation/stack';
-import SignUp from './src/components/Auth/SignUp/SignUp';
 import MainContainer from './src/components/Main/MainContainer';
 import auth from '@react-native-firebase/auth';
 import { logInUser } from './src/redux/auth/action'
@@ -20,6 +16,9 @@ import firestore from '@react-native-firebase/firestore';
 import { resetInitialLoad, setPost, setNewPost, turnOnNewPostNotification } from './src/redux/posts/actions'
 import ProfileContainer from './src/components/Profile/ProfileContainer'
 import { GoogleSignin } from '@react-native-community/google-signin';
+import { IAppProps, IAppReduxDispatch } from './types';
+import { SignInContainer } from './src/components/Auth/SignIn/SignInContainer';
+import { SignUpContainer } from './src/components/Auth/SignUp/SignUpContainer';
 
 GoogleSignin.configure({
   webClientId: '688161539775-n58725fv2efnj8oj8vsftjj6ns85gt8g.apps.googleusercontent.com',
@@ -27,27 +26,13 @@ GoogleSignin.configure({
 
 const Stack = createStackNavigator();
 
-interface IProps{
-  isAuth: boolean,
-  initialeLoad: boolean,
-  userID: string
-}
-
-interface IDispatchRedux{
-  logInUser: (displayName: string, userID: string, userPhoto: string, isAuth?: boolean) => void,
-  resetInitialLoad: () => void,
-  setPost: ( id: string, data: any[] ) => void,
-  setNewPost: ( id: string, data: any[] ) => void,
-  turnOnNewPostNotification: () => void
-}
-
-class App extends React.Component<IProps & IDispatchRedux>{
+class App extends React.Component<IAppProps & IAppReduxDispatch>{
   componentDidMount() {
 
     auth().onIdTokenChanged(
       (user) => {
         if (user !== null) {
-          this.props.logInUser(user.displayName, user.uid, user.photoURL);
+          this.props.logInUser(user?.displayName!, user.uid, user?.photoURL!);
         }
         if (user && user.displayName === null) {
           user.getIdToken(true)
@@ -88,8 +73,8 @@ class App extends React.Component<IProps & IDispatchRedux>{
             <Stack.Navigator>
               {!this.props.isAuth ? 
                 <>
-                 <Stack.Screen name="SignIn" component={SignIn} />
-                 <Stack.Screen name="SignUp" component={SignUp} />
+                 <Stack.Screen name="SignIn" component={SignInContainer} />
+                 <Stack.Screen name="SignUp" component={SignUpContainer} />
                 </>
                 :
                 <>
@@ -111,7 +96,7 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-const mapDispatchToProps: IDispatchRedux = {
+const mapDispatchToProps: IAppReduxDispatch = {
   logInUser,
   resetInitialLoad,
   setPost,

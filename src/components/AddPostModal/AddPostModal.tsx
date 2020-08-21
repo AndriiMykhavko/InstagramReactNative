@@ -11,15 +11,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import PostDataHandler from './PostDataHandler/PostDataHandler'
+import { IAddPostModalProps, IAddPostModalDispathRedux } from '../../../types';
 
-interface IProps{
-  name: string,
-  userPhoto: string,
-  userID: string,
-  addPostIntoDB: (userName: string, postImage: any, postData: string, userID: string, userPhoto: string, imageName: string) => void
-}
 
-const AddPostModal: React.FC<IProps> = (props) => {
+const AddPostModal: React.FC<IAddPostModalProps & IAddPostModalDispathRedux> = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const closeModal = () =>  setModalVisible(!modalVisible)
@@ -70,7 +65,6 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
-    // alignItems: "center",
   },
   modalView: {
     margin: 20,

@@ -1,11 +1,9 @@
 import React from 'react'
-import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { IHeaderProps } from '../../../types'
 
-interface IProps{
-  logout: () => void
-}
 
-export default function Header(props: IProps) {
+export default function Header(props: IHeaderProps) {
   return (
     <View style={styles.headerWrapper}>
       <Text style={styles.headerText}>Instagram</Text>

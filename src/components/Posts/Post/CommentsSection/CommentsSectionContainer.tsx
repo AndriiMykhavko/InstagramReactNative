@@ -2,20 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addCommetnIntoDB } from '../../../../redux/posts/actions'
 import CommentsSection from './CommentsSection'
-import { IComment } from './Comment/Comment'
+import { ICommentsSectionContainerProps, ICommentsSectionContainerDispatchRedux } from '../../../../../types'
 
-interface IProps{
-  postID: string,
-  owner: string,
-  ownerImage: string,
-  postComments: IComment[],
-}
 
-interface IDispatchRedux{
-  addCommetnIntoDB: (postID: string, owner: string, ownerImage: string, newCommentText: string) => void
-}
-
-export class CommentsSectionContainer extends Component<IProps & IDispatchRedux> {
+export class CommentsSectionContainer extends Component<ICommentsSectionContainerProps & ICommentsSectionContainerDispatchRedux> {
 
   addCommetnIntoDB = (newCommentData: string) => {
     this.props.addCommetnIntoDB(this.props.postID, this.props.owner, this.props.ownerImage, newCommentData)
@@ -33,7 +23,7 @@ const mapStateToProps = (state: any) => ({
   ownerImage: state.auth.userPhoto
 })
 
-const mapDispatchToProps: IDispatchRedux = {
+const mapDispatchToProps: ICommentsSectionContainerDispatchRedux = {
   addCommetnIntoDB
 }
 

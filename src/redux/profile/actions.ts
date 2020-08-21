@@ -1,5 +1,5 @@
 import { userMamageAPI } from '../../api/api';
-import types from './types'
+// import types from './types'
 
 export const actionCreator = (type: string, payload: any ) => ({
   type,

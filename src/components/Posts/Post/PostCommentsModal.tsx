@@ -7,15 +7,13 @@ import {
   TouchableWithoutFeedback ,
   View
 } from "react-native";
-import Comment, { IComment } from "./CommentsSection/Comment/Comment";
+import Comment from "./CommentsSection/Comment/Comment";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { IPostCommentsModalProps, IComment } from "../../../../types";
 
-interface IProps{
-  postComments: IComment[]
-}
 
-const PostCommentsModal = (props: IProps) => {
+const PostCommentsModal: React.FC<IPostCommentsModalProps> = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const postComments = props.postComments?.slice(0).reverse().map( (commentData: IComment, index: any) => 

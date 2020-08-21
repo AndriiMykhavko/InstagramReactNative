@@ -4,27 +4,14 @@ import { UserPhotoSection } from '../../UserPhotoSection/UserPhotoSection'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons'
-import { IComment } from './CommentsSection/Comment/Comment'
 import FitImage from 'react-native-fit-image'
 import moment from "moment";
 import PostCommentsModal from './PostCommentsModal'
 import CommentsSectionContainer from './CommentsSection/CommentsSectionContainer'
+import {  IPost, IPostDispatchRedux } from '../../../../types'
 
-export interface IPost{
-  likes: string[],
-  owner: string,
-  postComments: IComment[],
-  postID: string,
-  postImg: string,
-  postData: string,
-  uploadTime: any,
-  userID: string,
-  ownerImage: string,
-  likePost: (postID: string, userID: string) => void,
-  unlikePost: (postID: string, userID: string) => void
-}
 
-export default function Post(props: IPost): JSX.Element {
+const Post:React.FC<IPost & IPostDispatchRedux> = (props) => {
 
   const likePost = (postID: string, userID: string) => {
     props.likePost(postID, userID)
@@ -159,3 +146,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15
   }
 })
+
+export default Post

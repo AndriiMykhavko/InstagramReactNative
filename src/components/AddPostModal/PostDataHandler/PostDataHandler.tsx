@@ -3,7 +3,6 @@ import ImagePicker from 'react-native-image-picker'
 import FitImage from 'react-native-fit-image'
 import {
   Text,
-  TouchableOpacity,
   StyleSheet,
   View,
   TextInput, 
@@ -20,8 +19,8 @@ interface IProps{
 
 const PostDataHandler: React.FC<IProps> = (props) => {
   const [photo, setPhoto] = useState(null);
-  const [photoPath, setPhotoPath] = useState(null);
-  const [postData, onChangeText] = React.useState(null);
+  const [photoPath, setPhotoPath] = useState('');
+  const [postData, onChangeText] = React.useState('');
   
   const addPostIntoDB = () => {
     props.addPostIntoDB(props.name, photoPath, postData, props.userID, props.userPhoto, photo?.name )

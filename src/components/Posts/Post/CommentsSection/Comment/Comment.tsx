@@ -1,12 +1,8 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { UserPhotoSection } from '../../../../UserPhotoSection/UserPhotoSection'
+import { IComment } from '../../../../../../types'
 
-export interface IComment{
-  comment: string,
-  owner: string,
-  ownerImage: string
-}
 
 export default function Comment(props: IComment): JSX.Element {
   return (

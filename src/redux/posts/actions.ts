@@ -1,14 +1,14 @@
 import { managePostAPI } from '../../api/api';
 import types from './types'
 import storage from '@react-native-firebase/storage';
+import { IPostDocData } from '../../../types';
 
 export const actionCreator = (type: string, payload: any ) => ({
   type,
   payload 
 })
 
-
-export const setPost = (postID: string, postData: any) => (dispatch: any) => {
+export const setPost = (postID: string, postData: Record<string, IPostDocData>) => (dispatch: any) => {
   dispatch(actionCreator(types.SET_POST, {postID, postData}))
 }
 
@@ -19,7 +19,7 @@ export const turnOffNewPostNotification = (addedNewPost = false) => (dispatch: a
   dispatch(actionCreator(types.TURN_OFF_NEW_POST, {addedNewPost}))
 }
 
-export const setNewPost = (postID: string, postData: any) => (dispatch: any) => {
+export const setNewPost = (postID: string, postData: Record<string, IPostDocData>) => (dispatch: any) => {
   dispatch(actionCreator(types.SET_NEW_POST, {postID, postData}))
 }
 
@@ -30,10 +30,6 @@ export const resetInitialLoad = (stateOfLoad = false) => (dispatch: any) => {
 export const resetNewPosts = () => ({
   type: types.RESET_NEW_POSTS,
 });
-
-// export const resetPosts = () => ({
-//   type: types.RESET_POSTS,
-// });
 
 export const likePost = (postID: string, userID: string) => (dispatch: any) => {
   managePostAPI

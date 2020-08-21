@@ -4,13 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { UserPhotoSection } from '../UserPhotoSection/UserPhotoSection'
 import AddPostModalContainer from '../AddPostModal/AddPostModalContainer'
+import { IBottonNavigationProps } from '../../../types'
 
-interface IProps{
-  navigation: any,
-  userPhoto: string
-}
 
-export default function BottomNavigation(props: IProps) {
+export default function BottomNavigation(props: IBottonNavigationProps) {
   return (
     <View style={styles.bottomNavigationWrapper}>
       <TouchableOpacity onPress={() => props.navigation.navigate('Main')} activeOpacity={0.6}>

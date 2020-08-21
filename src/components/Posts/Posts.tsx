@@ -1,16 +1,11 @@
 import React from 'react'
-import Post, { IPost } from './Post/Post'
+import Post from './Post/Post'
+import { IPost } from '../../../types.d'
 import { SafeAreaView, FlatList } from 'react-native'
+import { IPostsContainerProps, IPostDispatchRedux } from '../../../types'
 
-interface IProps{
-  posts: IPost[],
-  userID: string,
-  likePost: (postID: string, userID: string) => void,
-  unlikePost: (postID: string, userID: string) => void
-}
-
-export default function Posts(props: IProps) {
-  let postsElements = props.posts.map( (post: IPost, index) => 
+const Posts: React.FC<IPostsContainerProps & IPostDispatchRedux> = (props) => {
+  let postsElements = props.posts.map( (post, index) => 
   <Post likes={post.likes} owner={post.owner} key={index}
         postComments={post.postComments} postID={post.postID} postImg={post.postImg}
         postData={post.postData} uploadTime={post.uploadTime} userID={props.userID}
@@ -32,3 +27,5 @@ export default function Posts(props: IProps) {
     </SafeAreaView>
   )
 }
+
+export default Posts

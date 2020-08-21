@@ -1,15 +1,10 @@
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Text, TextInput } from 'react-native'
-import Comment, { IComment } from './Comment/Comment'
+import Comment from './Comment/Comment'
+import { ICommentsSectionProps, IComment } from '../../../../../types'
 
-interface IProps{
-  postComments: IComment[],
-  postID: string,
-  owner: string,
-  addCommetnIntoDB: (newCommentText: string) => void
-}
 
-export default function CommentsSection(props: IProps): JSX.Element {
+const CommentsSection: React.FC<ICommentsSectionProps> = (props) => {
 
   let postComments = props.postComments.slice(-3).reverse().map( (commentData: IComment, index) => 
     <Comment  key={index} owner={commentData.owner} ownerImage={commentData.ownerImage} comment={commentData.comment}/>
@@ -87,3 +82,6 @@ const styles = StyleSheet.create({
     color: '#0F9BF7'
   }
 })
+
+
+export default CommentsSection

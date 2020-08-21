@@ -2,17 +2,12 @@ import React, { Component } from 'react'
 import Header from './Header'
 import { logout } from '../../redux/auth/action'
 import { connect } from 'react-redux'
-// import { resetPosts } from '../../redux/posts/actions'
+import { IHeaderProps } from '../../../types'
 
-interface IReduxDispatch{
-  logout: () => void,
-  // resetPosts: () => void
-}
 
-class HeaderContainer extends Component<IReduxDispatch> {
+class HeaderContainer extends Component<IHeaderProps> {
   logout = () => {
     this.props.logout()
-    // this.props.resetPosts()
   }
 
   render() {
@@ -22,14 +17,8 @@ class HeaderContainer extends Component<IReduxDispatch> {
   }
 }
 
-const mapStateToProps = (state: any) => {
-  return{
-
-  }
-}
-const masDispatchToProps: IReduxDispatch = {
-  logout,
-  // resetPosts
+const masDispatchToProps: IHeaderProps = {
+  logout
 }
 
-export default connect(mapStateToProps, masDispatchToProps)(HeaderContainer)
+export default connect(null, masDispatchToProps)(HeaderContainer)
