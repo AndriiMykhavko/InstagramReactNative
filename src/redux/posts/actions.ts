@@ -70,7 +70,7 @@ export const addPostIntoDB = (name: string, postImage: any, postText: string, us
       () => {
         storage()
           .ref("images")
-          .child(name + '/' + postImage.name)
+          .child(name + '/' + imageName)
           .getDownloadURL()
           .then((url) => {
             const now = new Date().toUTCString()

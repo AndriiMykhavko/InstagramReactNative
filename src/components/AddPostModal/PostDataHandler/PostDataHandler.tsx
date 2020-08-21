@@ -23,7 +23,7 @@ const PostDataHandler: React.FC<IProps> = (props) => {
   const [postData, onChangeText] = React.useState('');
   
   const addPostIntoDB = () => {
-    props.addPostIntoDB(props.name, photoPath, postData, props.userID, props.userPhoto, photo?.name )
+    props.addPostIntoDB(props.name, photoPath, postData, props.userID, props.userPhoto, photo?.fileName! )
     props.closeModal()
   }
 

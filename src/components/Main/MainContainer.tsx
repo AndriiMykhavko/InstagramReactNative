@@ -11,9 +11,6 @@ import { INewPostMap, IMainContainerProps, IMainContainerDispatchRedux } from '.
 
 class  MainContainer extends React.Component<IMainContainerProps & IMainContainerDispatchRedux> {
 
-  componentDidMount() {
-    console.log(this.props.addedNewPost)
-  }
   addingNewPostToState = () => {
     this.props.newPosts.map((post: INewPostMap) => {
       this.props.setPost(post.postID, post.postData)
