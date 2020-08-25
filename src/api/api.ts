@@ -2,8 +2,10 @@ import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import { GoogleSignin } from '@react-native-community/google-signin';
+import { IAuth, IUserManage, IManagePost } from '../../types';
 
-export const authAPI: any = {
+
+export const authAPI: IAuth = {
   login(email: string, password: string) {
     return auth().signInWithEmailAndPassword(email, password);
   },
@@ -28,7 +30,7 @@ export const authAPI: any = {
   }
 };
 
-export const userMamageAPI: any = {
+export const userMamageAPI: IUserManage = {
   cnangeUserPhoto(userName: string, image: any, imageName: string){
     storage().ref(`images/` + userName + `/` + imageName).putFile(image)
     .on(
@@ -58,7 +60,8 @@ export const userMamageAPI: any = {
   }
 }
 
-export const managePostAPI: any = {
+
+export const managePostAPI: IManagePost = {
   uploadImage(name: string, image: any, imageName: string) {
     return storage().ref(`images/` + name + `/` + imageName).putFile(image)
   },
@@ -87,7 +90,7 @@ export const managePostAPI: any = {
       whoLikedPost: firestore.FieldValue.arrayRemove(userID)
     })
   },
-  uploadNewPostComment(postID: string, owner: string, ownerImage: string, comment: string,) {
+  uploadNewPostComment(postID: string, owner: string, ownerImage: string, comment: string) {
     return firestore().collection("usersPosts").doc(postID)
     .update({
       postComments: firestore.FieldValue.arrayUnion({owner, ownerImage, comment})

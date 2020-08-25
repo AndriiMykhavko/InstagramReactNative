@@ -12,7 +12,7 @@ const SignIn: React.FC<IAuthProps & ISignInDispatchRedux> = (props) => {
 
   return(
     <View style={signInStyles.root}>
-      <SignInForm navigation={props.navigation} login={props.login}/>
+      <SignInForm login={props.login}/>
 
       <View style={signInStyles.orView}>
         <Text style={signInStyles.or}>OR</Text>

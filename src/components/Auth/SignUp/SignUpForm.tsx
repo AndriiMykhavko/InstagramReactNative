@@ -1,12 +1,13 @@
 import React from 'react'
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 import { View, StyleSheet } from 'react-native';
 import { required, emailValidation } from '../../../utils/validators/validator';
 import { renderInput } from '../TextInput';
 import { SignButtons } from '../SignButtons';
+import { ISignUpDiapatchRedux } from '../../../../types';
 
 
-const SignUpForm = (props: any) => {
+const SignUpForm: React.FC<InjectedFormProps<{}, ISignUpDiapatchRedux> & ISignUpDiapatchRedux> = (props: any) => {
 
   const { handleSubmit } = props;
 
@@ -67,4 +68,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default reduxForm({form: 'test-form'})(SignUpForm);
+export default reduxForm<{}, ISignUpDiapatchRedux>({form: 'test-form'})(SignUpForm);

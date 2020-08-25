@@ -1,11 +1,13 @@
 import React from 'react'
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, InjectedFormProps } from "redux-form";
 import { View, Text, StyleSheet } from 'react-native';
 import { required, emailValidation } from '../../../utils/validators/validator';
 import { renderInput } from '../TextInput';
 import { SignButtons } from '../SignButtons';
+import { ISignInFormProps } from '../../../../types';
 
-const SignInForm = (props: any) => {
+
+const SignInForm: React.FC<InjectedFormProps<{}, ISignInFormProps> & ISignInFormProps> = (props) => {
   
   const { handleSubmit } = props;
 
@@ -69,4 +71,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default reduxForm({form: 'SignIn'})(SignInForm)
+export default reduxForm<{}, ISignInFormProps>({form: 'SignIn'})(SignInForm)

@@ -13,7 +13,7 @@ const SignUp: React.FC<IAuthProps & ISignUpDiapatchRedux> = (props) => {
         <Text style={signInStyles.header}>Instagram</Text>
        </View>
 
-      <SignUpForm navigation={props.navigation} registration={props.registration}/>
+      <SignUpForm registration={props.registration}/>
 
       <View style={signInStyles.signIn}>
         <Text style={signInStyles.signInText}>If you have account, </Text> 

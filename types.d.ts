@@ -1,3 +1,6 @@
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { FirebaseStorageTypes } from "@react-native-firebase/storage";
+
 export interface IAppProps{
   isAuth: boolean,
   initialeLoad: boolean,
@@ -165,4 +168,27 @@ export interface IAddPostModalProps{
 
 export interface IAddPostModalDispathRedux{
   addPostIntoDB: (userName: string, postImage: any, postData: string, userID: string, userPhoto: string, imageName: string) => void
+}
+
+export interface ISignInFormProps{
+  login: (email: string, password: string) => void
+}
+
+export interface IAuth{
+  login: (email: string, password: string) => Promise<FirebaseAuthTypes.UserCredential>,
+  registration: (email: string, password: string) => Promise<FirebaseAuthTypes.UserCredential>,
+  logout: () => Promise<void>,
+  googleAuth: () => void
+}
+
+export interface IUserManage{
+  cnangeUserPhoto: (userName: string, image: any, imageName: string) => void
+}
+
+export interface IManagePost{
+  uploadImage: (name: string, image: any, imageName: string) => FirebaseStorageTypes.Task,
+  uploadPostData: (name: string, postImage: string, postData: string, uploadTime: string, userID: string, userPhoto: string) => Promise<FirebaseFirestoreTypes.DocumentReference>,
+  uploadWhoLikedPostData: (postID: string, userID: string) => Promise<void>,
+  uploadWhoDeletedLikedPostData: (postID: string, userID: string) => Promise<void>,
+  uploadNewPostComment: (postID: string, owner: string, ownerImage: string, comment: string) => Promise<void>
 }
