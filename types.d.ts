@@ -1,5 +1,6 @@
 import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { FirebaseStorageTypes } from "@react-native-firebase/storage";
+import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
 
 export interface IAppProps{
   isAuth: boolean,
