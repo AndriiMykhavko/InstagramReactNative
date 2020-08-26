@@ -83,7 +83,7 @@ const Post:React.FC<IPost & IPostDispatchRedux> = (props) => {
       </View>
 
 
-      <CommentsSectionContainer postComments={props.postComments} postID={props.postID} owner={props.owner} />
+      <CommentsSectionContainer postComments={props.postComments} postID={props.postID} />
 
     </View>
   )

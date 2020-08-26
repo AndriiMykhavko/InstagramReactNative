@@ -20,7 +20,8 @@ export class CommentsSectionContainer extends Component<ICommentsSectionContaine
 }
 
 const mapStateToProps = (state: any) => ({
-  ownerImage: state.auth.userPhoto
+  ownerImage: state.auth.userPhoto,
+  owner: state.auth.name
 })
 
 const mapDispatchToProps: ICommentsSectionContainerDispatchRedux = {
