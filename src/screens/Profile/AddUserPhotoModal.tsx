@@ -15,6 +15,7 @@ import FitImage from 'react-native-fit-image'
 import { setUserPhoto } from '../../redux/profile/actions'
 import { IAddPhotoModalProps } from "../../../types";
 import styles from './ModalStyles'
+import { handleChosePhoto } from "../../utils/ImagePicker/ImagePicker";
 
 
 const AddUserPhotoModal: React.FC<IAddPhotoModalProps> = (props) => {
@@ -22,26 +23,30 @@ const AddUserPhotoModal: React.FC<IAddPhotoModalProps> = (props) => {
   const [photo, setPhoto] = useState(null);
   const [photoPath, setPhotoPath] = useState('');
 
-  const handleChosePhoto = () => {
-    const options = {
-      noData: false
-    }
+  // const handleChosePhoto = () => {
+  //   const options = {
+  //     noData: false
+  //   }
 
-    ImagePicker.launchImageLibrary(options, (response) => {
-      console.log('Response = ', response);
+  //   ImagePicker.launchImageLibrary(options, (response) => {
+  //     console.log('Response = ', response);
      
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        setPhoto(response)
-        setPhotoPath("file://" + response.path)
-      }
-    }); 
-  }
+  //     if (response.didCancel) {
+  //       console.log('User cancelled image picker');
+  //     } else if (response.error) {
+  //       console.log('ImagePicker Error: ', response.error);
+  //     } else if (response.customButton) {
+  //       console.log('User tapped custom button: ', response.customButton);
+  //     } else {
+  //       setPhoto(response)
+  //       setPhotoPath("file://" + response.path)
+  //     }
+  //   }); 
+  // }
+
+  const takePhoto = () => {
+    handleChosePhoto().then((value) => {setPhoto(value); setPhotoPath("file://" + value.path)})
+   }
 
   const  changeUserPhoto = () => {
     setUserPhoto(props.userName, photoPath, photo?.fileName)
@@ -80,7 +85,7 @@ const AddUserPhotoModal: React.FC<IAddPhotoModalProps> = (props) => {
 
             {
               !photo ?
-              <TouchableOpacity style={styles.uploadPhotoButton} onPress={handleChosePhoto}>
+              <TouchableOpacity style={styles.uploadPhotoButton} onPress={takePhoto}>
                   <Text style={styles.uploadPhotoButtonText}>Select photo</Text>
               </TouchableOpacity>
               :
@@ -91,7 +96,7 @@ const AddUserPhotoModal: React.FC<IAddPhotoModalProps> = (props) => {
                 <View style={styles.orWrapper}>
                   <Text style={styles.orText}>OR</Text>
                 </View>
-                <TouchableOpacity style={styles.uploadPhotoButton} onPress={handleChosePhoto}>
+                <TouchableOpacity style={styles.uploadPhotoButton} onPress={takePhoto}>
                   <Text style={styles.uploadPhotoButtonText}>Select another photo</Text>
                 </TouchableOpacity>
               </>

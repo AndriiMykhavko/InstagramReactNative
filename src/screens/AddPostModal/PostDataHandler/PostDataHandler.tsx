@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ImagePicker from 'react-native-image-picker'
 import FitImage from 'react-native-fit-image'
 import {
   Text,
@@ -18,12 +17,26 @@ interface IProps{
   closeModal: () => void
 }
 
+interface IResponce{
+  data: string,
+  fileName: string,
+  fileSize: number,
+  height: number,
+  isVertical: boolean,
+  latitude: number,
+  longitude: number,
+  originalRotation: number,
+  path: string,
+  timestamp: string,
+  type: string,
+  uri: string,
+  width: number
+}
+
 const PostDataHandler: React.FC<IProps> = (props) => {
   const [photo, setPhoto] = useState(null);
   const [photoPath, setPhotoPath] = useState('');
   const [postData, onChangeText] = React.useState('');
-
-  console.log(photo)
   
   const addPostIntoDB = () => {
     props.addPostIntoDB(props.name, photoPath, postData, props.userID, props.userPhoto, photo?.fileName )
@@ -52,9 +65,8 @@ const PostDataHandler: React.FC<IProps> = (props) => {
   // }
 
 
-  const takePhoto = (photo: any) => {
-    console.log(photo, "sdfsdgsdgsg")
-   return setPhoto(photo)
+  const takePhoto = () => {
+   handleChosePhoto().then((value: IResponce) => {setPhoto(value); setPhotoPath("file://" + value.path)})
   }
 
   // setPhoto(takePhoto())
@@ -65,7 +77,7 @@ const PostDataHandler: React.FC<IProps> = (props) => {
       {photo && (
         <FitImage source={{ uri: photo.uri }} />
       )}
-      <TouchableHighlight style={styles.uploadPhotoButton} onPress={() => takePhoto(handleChosePhoto())}>
+      <TouchableHighlight style={styles.uploadPhotoButton} onPress={takePhoto}>
           <Text style={styles.uploadPhotoButtonText}>Select photo</Text>
       </TouchableHighlight>
 
