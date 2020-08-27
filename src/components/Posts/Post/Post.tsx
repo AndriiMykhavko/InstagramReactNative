@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { UserPhotoSection } from '../../UserPhotoSection/UserPhotoSection'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -9,9 +9,18 @@ import moment from "moment";
 import PostCommentsModal from './PostCommentsModal'
 import CommentsSectionContainer from './CommentsSection/CommentsSectionContainer'
 import {  IPost, IPostDispatchRedux } from '../../../../types'
+import styles from './Styles'
 
 
 const Post:React.FC<IPost & IPostDispatchRedux> = (props) => {
+
+  const renderHeartButton = (like: boolean) => {
+    return(
+      <TouchableOpacity onPress={() => like ? unlikePost(props.postID, props.userID) :  likePost(props.postID, props.userID)}>
+            <FontAwesomeIcon style={ like ? styles.likesButtonActive : styles.likesButton} icon={ like ? faHeart : faHeartRegular } size={ 24 }/>
+      </TouchableOpacity>
+    )
+ }
 
   const likePost = (postID: string, userID: string) => {
     props.likePost(postID, userID)
@@ -41,21 +50,10 @@ const Post:React.FC<IPost & IPostDispatchRedux> = (props) => {
       <View style={styles.postButtons}>
 
         <View style={styles.likesButtonWrapper}>
-          {props.likes.length === 0 ?
-          <TouchableOpacity onPress={() => likePost(props.postID, props.userID)}>
-            <FontAwesomeIcon style={styles.likesButton} icon={ faHeartRegular } size={ 24 }/>
-          </TouchableOpacity>
-            : 
-            props.likes.find((item) => {
-            return item === props.userID
-            }) === props.userID ? 
-            <TouchableOpacity onPress={() => unlikePost(props.postID, props.userID)}>
-              <FontAwesomeIcon style={styles.likesButtonActive} icon={ faHeart } size={ 24 }/>
-            </TouchableOpacity>
-            : 
-            <TouchableOpacity onPress={() => likePost(props.postID, props.userID)}>
-              <FontAwesomeIcon style={styles.likesButton} icon={ faHeartRegular } size={ 24 }/>
-            </TouchableOpacity>
+          {
+            renderHeartButton(props.likes.find((item) => {
+              return item === props.userID
+              }) === props.userID)
           }
         </View>
 
@@ -89,62 +87,5 @@ const Post:React.FC<IPost & IPostDispatchRedux> = (props) => {
   )
 }
 
-const styles = StyleSheet.create({
-  postWrapper: {
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    borderColor: '#DBDBDB',
-    backgroundColor: '#fff',
-    marginVertical: 15,
-  },
-  postOwnerInfo: {
-    padding: 10,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  ownerNameWrapper: {
-    marginLeft: 15
-  },
-  ownerNameText: {
-    color: '#262626',
-    fontFamily: 'NotoSansKR-Medium',
-    fontWeight: "bold"
-  },
-  postPhotoWrapper: {
-    justifyContent: 'center'
-  },
-  postButtons: {
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    flexDirection: 'column'
-  },
-  likesButtonWrapper: {
-    width: 24
-  },
-  likesButton: {
-    color: '#262626'
-  },
-  likesButtonActive: {
-    color: '#ED4956'
-  },
-  likesCountWrapper: {
-    marginTop: 10,
-  },
-  likesCount: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    fontFamily: 'NotoSansKR-Medium'
-  },
-  postData: {
-    fontSize: 14
-  },
-  postCommentModal: {
-
-  },
-  postText: {
-    fontFamily: 'Karla-Regular',
-    paddingHorizontal: 15
-  }
-})
 
 export default Post

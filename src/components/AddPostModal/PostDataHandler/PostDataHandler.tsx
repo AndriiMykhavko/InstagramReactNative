@@ -3,11 +3,11 @@ import ImagePicker from 'react-native-image-picker'
 import FitImage from 'react-native-fit-image'
 import {
   Text,
-  StyleSheet,
   View,
   TextInput, 
   TouchableHighlight
 } from "react-native";
+import styles from './Styles'
 
 interface IProps{
   name: string,
@@ -23,7 +23,7 @@ const PostDataHandler: React.FC<IProps> = (props) => {
   const [postData, onChangeText] = React.useState('');
   
   const addPostIntoDB = () => {
-    props.addPostIntoDB(props.name, photoPath, postData, props.userID, props.userPhoto, photo?.fileName! )
+    props.addPostIntoDB(props.name, photoPath, postData, props.userID, props.userPhoto, photo?.fileName )
     props.closeModal()
   }
 
@@ -53,42 +53,19 @@ const PostDataHandler: React.FC<IProps> = (props) => {
       {photo && (
         <FitImage source={{ uri: photo.uri }} />
       )}
-
       <TouchableHighlight style={styles.uploadPhotoButton} onPress={handleChosePhoto}>
           <Text style={styles.uploadPhotoButtonText}>Select photo</Text>
       </TouchableHighlight>
 
       <TextInput multiline={true} value={postData} onChangeText={text => onChangeText(text)} style={styles.textInput} placeholder={'Write your post...'} />
         
-      <TouchableHighlight style={styles.uploadPhotoButton} disabled={!photo || !postData} onPress={addPostIntoDB}>
+      <TouchableHighlight style={[styles.uploadPhotoButton, !photo || !postData ? styles.disabledButton : styles.activeButton]} disabled={!photo || !postData} onPress={addPostIntoDB}>
         <Text style={styles.uploadPhotoButtonText}>Upload post</Text>
       </TouchableHighlight>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  uploadPhotoButton: {
-    marginTop: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    backgroundColor: '#262626',
-    borderRadius: 5,
-    alignItems: 'center'
-  },
-  uploadPhotoButtonText: {
-    color: '#fff',
-    fontSize: 15
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: '#DBDBDB',
-    marginTop: 10,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    maxHeight: 200, 
-    fontSize: 16,
-  }
-})
+
 
 export default PostDataHandler

@@ -17,7 +17,7 @@ import { resetInitialLoad, setPost, setNewPost, turnOnNewPostNotification } from
 import ProfileContainer from './src/components/Profile/ProfileContainer'
 import { GoogleSignin } from '@react-native-community/google-signin';
 import { IAppProps, IAppReduxDispatch } from './types';
-import { SignInContainer } from './src/components/Auth/SignIn/SignInContainer';
+import SignInContainer from './src/components/Auth/SignIn/SignInContainer';
 import { SignUpContainer } from './src/components/Auth/SignUp/SignUpContainer';
 
 GoogleSignin.configure({

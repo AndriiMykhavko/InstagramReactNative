@@ -2,7 +2,6 @@ import React, { useState }  from 'react'
 import {
   Alert,
   Modal,
-  StyleSheet,
   Text,
   TouchableHighlight,
   View,
@@ -12,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import PostDataHandler from './PostDataHandler/PostDataHandler'
 import { IAddPostModalProps, IAddPostModalDispathRedux } from '../../../types';
+import styles from './Styles'
 
 
 const AddPostModal: React.FC<IAddPostModalProps & IAddPostModalDispathRedux> = (props) => {
@@ -61,44 +61,5 @@ const AddPostModal: React.FC<IAddPostModalProps & IAddPostModalDispathRedux> = (
   )
 }
 
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-  },
-  openButton: {
-    backgroundColor: "#262626",
-    borderRadius: 5,
-    padding: 10,
-    elevation: 2,
-    width: 100,
-  },
-  textStyle: {
-    color: "white",
-    fontFamily: 'Sora-Regular',
-    textAlign: "center"
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  },
-  closeButtonWrapper: {
-    alignItems: 'flex-end'
-  },
-});
 
 export default AddPostModal

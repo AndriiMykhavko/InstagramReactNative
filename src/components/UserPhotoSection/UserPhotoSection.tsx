@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, Image } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { IUserPtotoProps } from '../../../types'
+import styles from './Styles'
 
 export const UserPhotoSection: React.FC<IUserPtotoProps> = (props) => {
   return(
@@ -22,37 +23,3 @@ export const UserPhotoSection: React.FC<IUserPtotoProps> = (props) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  ownerIconOutline: {
-    borderColor: 'darkgrey',
-    borderStyle: 'solid',
-    borderWidth: 2,
-    borderRadius: 42,
-    padding: 5,
-    height: 42,
-    width: 42,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  ownerImageWrapper: {
-    height: 32,
-    width: 32
-  },
-  ownerImage: {
-      width: '100%',
-      height: '100%',
-      borderRadius: 20
-  },
-  ownerIconWrapper: {
-    backgroundColor: '#DBDBDB',
-    borderRadius: 20,
-    height: 32,
-    width: 32,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  ownerIcon: {
-    color: '#fff'
-  }
-})

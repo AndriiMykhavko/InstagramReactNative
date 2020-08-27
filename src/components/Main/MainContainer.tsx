@@ -7,6 +7,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { turnOffNewPostNotification, resetNewPosts, setPost  } from '../../redux/posts/actions'
 import PostsContainer from '../Posts/PostsContainer'
 import { INewPostMap, IMainContainerProps, IMainContainerDispatchRedux } from '../../../types'
+import styles from './Styles'
 
 
 class  MainContainer extends React.Component<IMainContainerProps & IMainContainerDispatchRedux> {
@@ -47,35 +48,6 @@ class  MainContainer extends React.Component<IMainContainerProps & IMainContaine
   }
 }
 
-const styles = StyleSheet.create({
-  mainWrapper: {
-    flex: 1,
-    backgroundColor: '#FAFAFA',
-    position: 'relative'
-  },
-  mainContent: {
-    alignItems: 'stretch'
-  },
-  addedNewPost: {
-  margin: 15,
-  backgroundColor: '#fff',
-  paddingHorizontal: 15,
-  paddingVertical: 10,
-  borderColor: '#DBDBDB',
-  borderStyle: 'solid',
-  borderWidth: 1,
-  borderRadius: 5,
-  },
-  addedNewPostText: {
-    fontFamily: 'Sora-Regular'
-  },
-  position: {
-    position: 'absolute',
-    left: '30%',
-    top: '10%',
-    zIndex:100
-  }
-})
 
 const mapStateToProps = (state: any) => ({
   addedNewPost: state.postsPage.addedNewPost,

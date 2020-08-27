@@ -1,11 +1,12 @@
 import React from 'react'
 import { UserPhotoSection } from '../UserPhotoSection/UserPhotoSection'
 import Post from '../Posts/Post/Post'
-import { StyleSheet, View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import HeaderContainer from '../Header/HeaderContainer'
 import BottomNavigationContainer from '../BottomNavigation/BottomNavigationContainer'
 import AddUserPhotoModal from './AddUserPhotoModal'
 import { IProfileProps, IProfileDispatchRedux, IPost } from '../../../types'
+import styles from './Styles'
 
 
 const Profile: React.FC<IProfileProps & IProfileDispatchRedux> = (props)=> {
@@ -38,47 +39,5 @@ const Profile: React.FC<IProfileProps & IProfileDispatchRedux> = (props)=> {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  profileWrapper: {
-    flex: 1,
-    backgroundColor: '#FAFAFA'
-  },
-  userInfoWrapper: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: '#DBDBDB',
-    marginBottom: 15,
-    marginHorizontal: 20,
-    padding: 10,
-    justifyContent: 'space-evenly',
-    alignItems: 'flex-start'
-  },
-  userInfoText: {
-    fontSize: 30,
-    fontFamily: 'BalooDa2-Regular',
-    fontWeight: '100'
-  },
-  userTextAndInfoWrapper: {
-    marginTop: 5
-  },
-  ownerIconOutline: {
-    height: 112,
-    width: 112,
-    borderRadius: 100
-  },
-  ownerImageWrapper: {
-    height: 100,
-    width: 100,
-  },
-  ownerImage: {
-    borderRadius: 100
-  },
-  ownerIconWrapper: {
-    height: 100,
-    width: 100,
-    borderRadius: 100
-  }
-})
 
 export default Profile

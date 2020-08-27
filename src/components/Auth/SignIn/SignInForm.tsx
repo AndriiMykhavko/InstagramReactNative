@@ -1,10 +1,11 @@
 import React from 'react'
 import { reduxForm, Field, InjectedFormProps } from "redux-form";
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { required, emailValidation } from '../../../utils/validators/validator';
 import { renderInput } from '../TextInput';
 import { SignButtons } from '../SignButtons';
 import { ISignInFormProps } from '../../../../types';
+import styles from './FormStyles'
 
 
 const SignInForm: React.FC<InjectedFormProps<{}, ISignInFormProps> & ISignInFormProps> = (props) => {
@@ -39,6 +40,10 @@ const SignInForm: React.FC<InjectedFormProps<{}, ISignInFormProps> & ISignInForm
           component={renderInput}
         />
       </View>
+
+      <View>
+        <Text style={styles.submitError}>{props.error}</Text>
+      </View>
      
       <SignButtons title="Sign In"  onPress={handleSubmit(onSubmit)} backgroundColor="#0095F6"/>
       
@@ -46,29 +51,5 @@ const SignInForm: React.FC<InjectedFormProps<{}, ISignInFormProps> & ISignInForm
   );
 };
 
-const styles = StyleSheet.create({
-  root: {
-    paddingHorizontal: 32,
-    justifyContent: 'center'
-  },
-  marginBottom: {
-    marginBottom: 30
-  },
-  headerWrapper: {
-    alignItems: 'center',
-    marginBottom: 30
-  },
-  header: {
-    fontSize: 60,
-    fontFamily: 'BalooDa2-Bold'
-  },
-  input: {
-    padding: 8,
-    marginBottom: 8,
-    borderColor: 'blue',
-    borderWidth: 1,
-    borderRadius: 4
-  }
-});
 
 export default reduxForm<{}, ISignInFormProps>({form: 'SignIn'})(SignInForm)

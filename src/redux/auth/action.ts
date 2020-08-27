@@ -1,5 +1,6 @@
 import { authAPI } from "../../api/api";
 import types from './types'
+import { stopSubmit } from "redux-form";
 
 
 export const actionCreator = (type: string, payload: any ) => ({
@@ -11,14 +12,12 @@ export const logInUser = (displayName: string, userID: string, userPhoto: string
   dispatch(actionCreator(types.SET_USER_AUTH, {displayName, userID, userPhoto, isAuth}))
 }
 
-export const login = (email: string, password: string) =>  {
+export const login = (email: string, password: string) => (dispatch: any) => {
   authAPI
     .login(email, password)
-    .then((response: any) => {
-      if(response.user.email.length !== 0) {
-      }
-    })
-    .catch((error: any) => console.log(error));
+    .catch((error: any) => 
+      dispatch(stopSubmit('SignIn', {_error: 'Email or password is wrong.'}))
+    );
 }
 
 export const logoutUser = (displayName = '', userID = '', userPhoto = null, isAuth = false) => (dispatch: any) => {
@@ -29,7 +28,6 @@ export const registration = ( name: string, email: string, password: string) => 
   authAPI
     .registration(email, password)
     .then((response: any) => {
-      console.log(response)
       if(response.user) {
         response.user.updateProfile({
           displayName: name,

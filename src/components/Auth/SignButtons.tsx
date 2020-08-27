@@ -1,6 +1,7 @@
 import React from 'react'
-import { TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 import { ISignInButtonProps } from '../../../types'
+import styles from './SignInButtonStyles'
 
 
 export const SignButtons = ({ onPress, title, backgroundColor }: ISignInButtonProps): JSX.Element => {
@@ -10,22 +11,3 @@ export const SignButtons = ({ onPress, title, backgroundColor }: ISignInButtonPr
     </TouchableOpacity>
   )
 }
-
-const styles = StyleSheet.create({
-  SignInButtons: {
-    backgroundColor: "#0095F6",
-    padding: 10,
-    borderRadius: 3,
-    marginTop: 10,
-    marginBottom: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  SignInButtonsText: {
-    color: '#fff',
-    fontFamily: 'Rowdies',
-    fontWeight: '700',
-    letterSpacing: 0.5,
-    fontSize: 17
-  }
-})

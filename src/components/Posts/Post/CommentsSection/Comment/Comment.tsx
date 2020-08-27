@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, Text } from 'react-native'
 import { UserPhotoSection } from '../../../../UserPhotoSection/UserPhotoSection'
 import { IComment } from '../../../../../../types'
+import styles from './Styles'
 
 
 export default function Comment(props: IComment): JSX.Element {
@@ -17,21 +18,3 @@ export default function Comment(props: IComment): JSX.Element {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  commentWrapper: {
-    marginBottom: 20,
-    flexDirection: 'row'
-  },
-  commentTextWrapper: {
-    paddingTop: 10,
-    marginLeft: 10
-  },
-  commentText: {
-    fontFamily: 'Karla-Regular'
-  },
-  commentOwner: {
-    fontWeight: 'bold',
-    marginLeft: 15
-  }
-})

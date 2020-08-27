@@ -1,10 +1,11 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { UserPhotoSection } from '../UserPhotoSection/UserPhotoSection'
 import AddPostModalContainer from '../AddPostModal/AddPostModalContainer'
 import { IBottonNavigationProps } from '../../../types'
+import styles from './Styles'
 
 
 export default function BottomNavigation(props: IBottonNavigationProps) {
@@ -24,23 +25,3 @@ export default function BottomNavigation(props: IBottonNavigationProps) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  bottomNavigationWrapper: {
-    backgroundColor: '#fff',
-    flexDirection: "row",
-    paddingHorizontal: 50,
-    justifyContent: 'space-between',
-    paddingVertical: 5,
-    borderColor: '#DBDBDB',
-    borderTopWidth: 2,
-    alignItems: 'center'
-  },
-  homeButton: {
-    color: '#262626'
-  },
-  ownerIconOutline: {
-    borderColor: '#262626',
-    borderWidth: 3
-  }
-})

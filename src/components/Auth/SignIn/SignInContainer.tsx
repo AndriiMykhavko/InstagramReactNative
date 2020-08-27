@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { login, googleAuthentication } from '../../../redux/auth/action'
 import SignIn from './SignIn'
 import { ISignInDispatchRedux, IAuthProps } from '../../../../types'
+import { connect } from 'react-redux'
 
-export class SignInContainer extends Component<IAuthProps & ISignInDispatchRedux> {
+class SignInContainer extends Component<IAuthProps & ISignInDispatchRedux> {
 
   login = (email: string, password: string) => {
-    login(email, password)
+    this.props.login(email, password)
   }
 
   googleAuthentication = () => {
@@ -20,4 +21,8 @@ export class SignInContainer extends Component<IAuthProps & ISignInDispatchRedux
   }
 }
 
-export default SignInContainer
+const mapDispatchToProps = {
+  login
+}
+
+export default connect(null, mapDispatchToProps)(SignInContainer)
