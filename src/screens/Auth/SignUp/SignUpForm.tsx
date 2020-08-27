@@ -1,9 +1,9 @@
 import React from 'react'
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { required, emailValidation } from '../../../utils/validators/validator';
-import { renderInput } from '../TextInput';
-import { SignButtons } from '../SignButtons';
+import { renderInput } from '../../../components/TextInput/TextInput';
+import { SignButtons } from '../../../components/SignButton/SignButtons';
 import { ISignUpDiapatchRedux } from '../../../../types';
 import styles from './FormStyles'
 

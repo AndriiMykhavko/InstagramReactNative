@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native';
-import { SignButtons } from '../SignButtons';
+import { SignButtons } from '../../../components/SignButton/SignButtons';
 import { ISignInDispatchRedux, IAuthProps } from '../../../../types';
 import SignInForm from './SignInForm';
 import styles from './Styles'

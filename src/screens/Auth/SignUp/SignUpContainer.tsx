@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { registration } from '../../../redux/auth/action'
 import SignUp from './SignUp'
-import { IAuthProps, ISignUpDiapatchRedux } from '../../../../types.d'
+import { IAuthProps, ISignUpDiapatchRedux } from '../../../../types'
 
 
 export class SignUpContainer extends Component<IAuthProps & ISignUpDiapatchRedux>{

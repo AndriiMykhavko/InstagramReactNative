@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserPhotoSection } from '../UserPhotoSection/UserPhotoSection'
+import { UserPhotoSection } from '../../components/UserPhotoSection/UserPhotoSection'
 import Post from '../Posts/Post/Post'
 import { View, Text, ScrollView } from 'react-native'
 import HeaderContainer from '../Header/HeaderContainer'

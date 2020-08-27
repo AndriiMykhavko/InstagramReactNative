@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { UserPhotoSection } from '../../../../UserPhotoSection/UserPhotoSection'
+import { UserPhotoSection } from '../../../../../components/UserPhotoSection/UserPhotoSection'
 import { IComment } from '../../../../../../types'
 import styles from './Styles'
 

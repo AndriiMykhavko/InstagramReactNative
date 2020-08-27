@@ -1,6 +1,5 @@
 import React from 'react'
 import Post from './Post/Post'
-import { IPost } from '../../../types.d'
 import { SafeAreaView, FlatList } from 'react-native'
 import { IPostsContainerProps, IPostDispatchRedux } from '../../../types'
 

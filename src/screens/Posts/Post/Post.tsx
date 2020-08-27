@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { UserPhotoSection } from '../../UserPhotoSection/UserPhotoSection'
+import { UserPhotoSection } from '../../../components/UserPhotoSection/UserPhotoSection'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons'
