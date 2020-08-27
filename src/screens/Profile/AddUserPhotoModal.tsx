@@ -23,27 +23,6 @@ const AddUserPhotoModal: React.FC<IAddPhotoModalProps> = (props) => {
   const [photo, setPhoto] = useState(null);
   const [photoPath, setPhotoPath] = useState('');
 
-  // const handleChosePhoto = () => {
-  //   const options = {
-  //     noData: false
-  //   }
-
-  //   ImagePicker.launchImageLibrary(options, (response) => {
-  //     console.log('Response = ', response);
-     
-  //     if (response.didCancel) {
-  //       console.log('User cancelled image picker');
-  //     } else if (response.error) {
-  //       console.log('ImagePicker Error: ', response.error);
-  //     } else if (response.customButton) {
-  //       console.log('User tapped custom button: ', response.customButton);
-  //     } else {
-  //       setPhoto(response)
-  //       setPhotoPath("file://" + response.path)
-  //     }
-  //   }); 
-  // }
-
   const takePhoto = () => {
     handleChosePhoto().then((value) => {setPhoto(value); setPhotoPath("file://" + value.path)})
    }

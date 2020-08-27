@@ -43,34 +43,10 @@ const PostDataHandler: React.FC<IProps> = (props) => {
     props.closeModal()
   }
 
-  // const handleChosePhoto = () => {
-  //   const options = {
-  //     noData: false
-  //   }
-
-  //   ImagePicker.launchImageLibrary(options, (response) => {
-  //     console.log('Response = ', response);
-     
-  //     if (response.didCancel) {
-  //       console.log('User cancelled image picker');
-  //     } else if (response.error) {
-  //       console.log('ImagePicker Error: ', response.error);
-  //     } else if (response.customButton) {
-  //       console.log('User tapped custom button: ', response.customButton);
-  //     } else {
-  //       setPhoto(response)
-  //       setPhotoPath("file://" + response.path)
-  //     }
-  //   }); 
-  // }
-
-
   const takePhoto = () => {
    handleChosePhoto().then((value: IResponce) => {setPhoto(value); setPhotoPath("file://" + value.path)})
   }
 
-  // setPhoto(takePhoto())
-  // setPhotoPath("file://" + photo?.path)
 
   return(
     <View>
