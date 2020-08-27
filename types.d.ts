@@ -24,7 +24,8 @@ export interface IPostDocData{
   postData: string,
   uploadTime: string,
   userID: string,
-  ownerImage: string
+  ownerImage: string,
+  timestamp: string
 }
 
 export interface IComment{
