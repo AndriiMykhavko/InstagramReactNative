@@ -23,8 +23,10 @@ const AddUserPhotoModal: React.FC<IAddPhotoModalProps> = (props) => {
   const [photo, setPhoto] = useState(null);
   const [photoPath, setPhotoPath] = useState('');
 
-  const takePhoto = () => {
-    handleChosePhoto().then((value) => {setPhoto(value); setPhotoPath("file://" + value.path)})
+  const takePhoto = async () => {
+    let photo = await handleChosePhoto()
+    setPhoto(photo)
+    setPhotoPath("file://" + photo.path)
    }
 
   const  changeUserPhoto = () => {

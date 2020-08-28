@@ -43,8 +43,10 @@ const PostDataHandler: React.FC<IProps> = (props) => {
     props.closeModal()
   }
 
-  const takePhoto = () => {
-   handleChosePhoto().then((value: IResponce) => {setPhoto(value); setPhotoPath("file://" + value.path)})
+  const takePhoto = async () => {
+    let photo = await handleChosePhoto()
+    setPhoto(photo)
+    setPhotoPath("file://" + photo.path)
   }
 
 

@@ -11,7 +11,7 @@ import styles from './Styles'
 
 
 class  MainContainer extends React.Component<IMainContainerProps & IMainContainerDispatchRedux> {
-
+  
   addingNewPostToState = () => {
     this.props.newPosts.map((post: INewPostMap) => {
       this.props.setPost(post.postID, post.postData)
